@@ -92,5 +92,31 @@ def longest_sequence_of_same_value(lst):
 
     return max_length, longest_value
 
-# todo Task G
+# task G
 
+# calculates the trend in two lists where one is for x-values and the other for y-values
+# the function returns a and b which are parametres in the linear function: ax + b
+def calculate_trend(x_value_list,y_value_list):
+    n = len(x_value_list)
+    sum_x = 0
+    sum_y = 0
+    a_upper=0
+    a_lower=0
+    for i in range(n):
+        sum_x += x_value_list[i]
+        sum_y += y_value_list[i]
+    x_avg = sum_x/n
+    y_avg = sum_y/n
+
+    for i in range(n):
+        a_upper +=(x_value_list[i]-x_avg)*(y_value_list[i]-y_avg)
+        a_lower +=(x_value_list[i]-x_avg)*(x_value_list[i]-x_avg)
+
+    a =a_upper/a_lower
+    b = y_avg-a*x_avg
+
+    if(len(x_value_list)==len(y_value_list)):
+        return a, b
+
+    else:
+        print("Cannot calculate trend, the lists have different lengths")

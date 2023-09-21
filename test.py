@@ -21,10 +21,20 @@ numbers = [2, 5, 0, 0, 0, 3, 6, 4, 0, 0, 5, 0, 12, 12, 12, 12, 7, 19]
 print("F: Length of longest sequence of 0s:", longest_continuous_sequence_of_zeros(numbers))
 
 # optional 
-integers =  [2, 5, 0, 0, 0, 3, 6, 4, 0, 0, 5, 0, 12, 12, 12, 12, 7, 19] #[2, 2, 2, 4, 4, 4, 4, 1, 1, 2, 2, 2, 2, 2]
+integers =  [2, 5, 0, 0, 0, 3, 6, 4, 0, 0, 5, 0, 12, 12, 12, 12, 7, 19]
 length, value = longest_sequence_of_same_value(integers)
 print(f"F: Length of longest sequence of {value}s:", length)
 
+# Task i
+temperaturer, task_i_diffrence_print= [-5, 2, 6, 13, 9, 22, 28, 19, 24, 12, 5, 1, -3, -8, 2, 8, 15, 18, 21, 26, 21, 31, 15, 4, 1, -2],[]
+task_i_differences = calculate_differences(temperaturer)
+for i in task_i_differences:
+    if i < 0:
+        task_i_diffrence_print.append(str(f"{i} -falling"))
+    else:
+        task_i_diffrence_print.append(str(f"{i} -rising"))    
+
+print("i: Differences between consecutive numbers:", task_i_diffrence_print)
 
 # task K
 temperaturer = [-5, 2, 6, 13, 9, 22, 28, 19, 24, 12, 5, 1, -3, -8, 2, 8, 15, 18, 21, 26, 21, 31, 15, 4, 1, -2]

@@ -25,3 +25,18 @@ integers =  [2, 5, 0, 0, 0, 3, 6, 4, 0, 0, 5, 0, 12, 12, 12, 12, 7, 19] #[2, 2, 
 length, value = longest_sequence_of_same_value(integers)
 print(f"F: Length of longest sequence of {value}s:", length)
 
+
+# task K
+temperaturer = [-5, 2, 6, 13, 9, 22, 28, 19, 24, 12, 5, 1, -3, -8, 2, 8, 15, 18, 21, 26, 21, 31, 15, 4, 1, -2]
+temperaturer_tidspunkter = list()
+for index in range(len(temperaturer)):
+    temperaturer_tidspunkter.append(index)
+
+trend =calculate_trend(temperaturer_tidspunkter,temperaturer)[0]
+print("K: The trend of Temperaturer is:",trend)
+if (trend>0):
+    print("K: The trend is rising")
+elif (trend<0):
+    print("K: The trend is decreasing")
+else:
+    print("There is no trend")

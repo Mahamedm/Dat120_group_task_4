@@ -30,5 +30,5 @@ else:
     print("There is no trend")
 
 # task M
-print(f"M: longest perion without precipitation is: {longest_continuous_sequence_of_zeros(dogn_nedbor)} days")
+print(f"M: longest period without precipitation is: {longest_continuous_sequence_of_zeros(dogn_nedbor)} days")
 

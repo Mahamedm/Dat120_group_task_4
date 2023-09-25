@@ -53,7 +53,6 @@ def calculate_derivative_of_averages(averages):
 
 
 # task F
-
 # calculates the number of zeroes in a list
 def longest_continuous_sequence_of_zeros(lst):
     max_length = 0 
@@ -93,33 +92,6 @@ def longest_sequence_of_same_value(lst):
     return max_length, longest_value
 
 # task G
-
-
-#%% Task H < this makes the exercise alone in cell for testing so i do not have to run the whole file in order to test my task :)
-
-def calculate_plantgrowth(temp_list):
-    sum_growth = 0
-    for temp in temp_list:
-        if temp > 5:
-            growth = (temp - 5) * 1
-            sum_growth += growth
-    return sum_growth
-
-# Exempel of functionality:
-temp_list = [4, 7, 15]
-total_growth = calculate_plantgrowth(temp_list)
-print(total_growth)
-# %% Task L 
-
-temp_list =  [-5, 2, 6, 13, 9, 22, 28, 19, 24, 12, 5, 1, -3, -8, 2, 8, 15, 18, 21, 26, 21, 31, 15, 4, 1, -2]
-total_growth = calculate_plantgrowth(temp_list)
-print(total_growth)
-
-#Note to group : I do not know if he wants me to import the list or i can just bypass by defining it here :/
-
-#%%
-
-
 # calculates the trend in two lists where one is for x-values and the other for y-values
 # the function returns a and b which are parametres in the linear function: ax + b
 def calculate_trend(x_value_list,y_value_list):
@@ -149,3 +121,16 @@ def calculate_trend(x_value_list,y_value_list):
 
 
 
+# Task H 
+def calculate_plantgrowth(temp_list):
+    sum_growth = 0
+    for temp in temp_list:
+        if temp > 5:
+            growth = (temp - 5) * 1
+            sum_growth += growth
+    return sum_growth
+
+# Example of functionality:
+# temp_list = [4, 7, 15]
+# total_growth = calculate_plantgrowth(temp_list)
+# print(total_growth)

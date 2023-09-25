@@ -29,6 +29,11 @@ elif (trend<0):
 else:
     print("There is no trend")
 
+# task L
+temp_list =  temperaturer
+total_growth = calculate_plantgrowth(temp_list)
+print(f"L: {total_growth}")
+
 # task M
 print(f"M: longest period without precipitation is: {longest_continuous_sequence_of_zeros(dogn_nedbor)} days")
 

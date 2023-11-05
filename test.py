@@ -7,7 +7,7 @@ temperaturer_tidspunkter = list()
 for index in range(len(temperaturer)):
     temperaturer_tidspunkter.append(index)
 
-# Task J
+# (Part 1)Task J
 temperaturer, task_i_diffrence_print= temperaturer,[]
 task_i_differences = calculate_differences(temperaturer)
 for i in task_i_differences:
@@ -19,7 +19,7 @@ for i in task_i_differences:
         task_i_diffrence_print.append(str(f"{i} -rising")) 
 print("i: Differences between consecutive numbers:", task_i_diffrence_print)
 
-# task K
+# (Part 1)task K
 trend =calculate_trend(temperaturer_tidspunkter,temperaturer)[0]
 print("K: The trend of Temperaturer is:",trend)
 if (trend>0):
@@ -29,7 +29,7 @@ elif (trend<0):
 else:
     print("There is no trend")
 
-# task L
+# (Part 1)task L
 temp_list =  temperaturer
 total_growth = calculate_plantgrowth(temp_list)
 print(f"L: {total_growth}")

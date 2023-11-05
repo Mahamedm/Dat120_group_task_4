@@ -11,7 +11,7 @@ def count_greater_equal(lst, value):
             count += 1
     return count
 
-# Task E
+# (Part 1)Task E
 # calculates the diffrence between a list of numbers.
 def calculate_differences(lst):
     differences = []
@@ -52,7 +52,7 @@ def calculate_derivative_of_averages(averages):
     return derivatives
 
 
-# task F
+# (Part 1)task F
 # calculates the number of zeroes in a list
 def longest_continuous_sequence_of_zeros(lst):
     max_length = 0 
@@ -91,7 +91,7 @@ def longest_sequence_of_same_value(lst):
 
     return max_length, longest_value
 
-# task G
+# (Part 1)task G
 # calculates the trend in two lists where one is for x-values and the other for y-values
 # the function returns a and b which are parametres in the linear function: ax + b
 def calculate_trend(x_value_list,y_value_list):
@@ -121,7 +121,7 @@ def calculate_trend(x_value_list,y_value_list):
 
 
 
-# Task H 
+# (Part 1)Task H 
 def calculate_plantgrowth(temp_list):
     sum_growth = 0
     for temp in temp_list:

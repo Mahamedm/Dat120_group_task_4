@@ -134,3 +134,4 @@ def calculate_plantgrowth(temp_list):
 # temp_list = [4, 7, 15]
 # total_growth = calculate_plantgrowth(temp_list)
 # print(total_growth)
+

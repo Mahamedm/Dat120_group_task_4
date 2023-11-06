@@ -37,4 +37,88 @@ else:
     print(", Thus there is no trend")
 
 
+# task g) Data analysis and plotting code
+def analyze_data(data):
+    valid_years = {}  
 
+    for row in data[1:]:  
+        try:
+            year = int(row[2].split('.')[2])  
+            skydekke = float(row[6].replace(',', '.'))  
+
+            
+            if year not in valid_years:
+                valid_years[year] = {'penvaersdager': 0, 'days_with_data': 0}
+
+            valid_years[year]['days_with_data'] += 1
+
+            if skydekke <= 3:
+                valid_years[year]['penvaersdager'] += 1
+        except (ValueError, IndexError):
+            pass
+
+    valid_years = {year: data for year, data in valid_years.items() if data['days_with_data'] >= 300}
+
+    years = list(valid_years.keys())
+    penvaersdager = [data['penvaersdager'] for data in valid_years.values()]
+
+
+    plt.bar(years, penvaersdager)
+    plt.xlabel('Year')
+    plt.ylabel('Number of penværsdager')
+    plt.title('Number of penværsdager per year')
+    plt.show()
+
+analyze_data(single_weather_station)
+
+
+ # task h)
+def analyze_wind_data(data):
+    valid_years = {}  
+
+    
+    for row in data[1:]:  
+        try:
+            year = int(row[2].split('.')[2])  
+            wind_speed = float(row[7].replace(',', '.'))  
+
+            if year not in valid_years:
+                valid_years[year] = {'wind_speeds': []}
+
+            valid_years[year]['wind_speeds'].append(wind_speed)
+        except (ValueError, IndexError):
+            
+            pass
+
+    
+    valid_years = {year: data for year, data in valid_years.items() if len(data['wind_speeds']) >= 300}
+
+    return valid_years
+
+
+def plot_wind_data(data):
+    years = list(data.keys())
+    highest_wind_speeds = [max(data[year]['wind_speeds']) for year in years]
+    median_wind_speeds = [sorted(data[year]['wind_speeds'])[len(data[year]['wind_speeds']) // 2] for year in years]
+
+   
+    plt.figure(figsize=(12, 6))
+    plt.subplot(2, 1, 1)
+    plt.plot(years, highest_wind_speeds, marker='o')
+    plt.xlabel('Year')
+    plt.ylabel('Highest Wind Speed (m/s)')
+    plt.title('Highest Wind Speed per Year')
+
+
+    plt.subplot(2, 1, 2)
+    plt.plot(years, median_wind_speeds, marker='o', color='orange')
+    plt.xlabel('Year')
+    plt.ylabel('Median Wind Speed (m/s)')
+    plt.title('Median Wind Speed per Year')
+
+    plt.tight_layout()
+    plt.show()
+
+
+wind_data = analyze_wind_data(single_weather_station)
+plot_wind_data(wind_data)

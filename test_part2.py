@@ -17,7 +17,7 @@ def initialize_data():
 initialize_data()
 
 # task b
-# TODO: Unbreakand and uncomment the code before delivery!
+# TODO: Unbreak and uncomment the code before delivery!
 ski_seasons_data = count_skiable_days_per_season(single_weather_station, snow_depth_index=3, date_index=2)
 for season, days in ski_seasons_data.items():
     # print(f"Winter season {season}-{season+1} had {days} skiing days.")
@@ -36,5 +36,5 @@ elif (ski_trend<0):
 else:
     print(", Thus there is no trend")
 
-# task d
+
 

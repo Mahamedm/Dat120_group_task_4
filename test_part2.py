@@ -24,3 +24,5 @@ for season, days in ski_seasons_data.items():
     print(f"Winter season {season}-{season+1} had {days} skiing days.")
 
 # task c
+
+

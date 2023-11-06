@@ -148,7 +148,7 @@ def count_skiable_days_per_season(weather_data, snow_depth_index, date_index, sk
     skiable_days_per_season = {}
 
     # Skip the header row
-    for entry in weather_data[1:]:  # Assuming the first row is the header
+    for entry in weather_data[1:]:  #the first row is the header
         date_str = entry[date_index]
         snow_depth = entry[snow_depth_index]
 
@@ -179,3 +179,5 @@ def count_skiable_days_per_season(weather_data, snow_depth_index, date_index, sk
         skiable_days_count[season] = count_greater_equal(depths, skiing_depth_threshold)
 
     return skiable_days_count
+
+

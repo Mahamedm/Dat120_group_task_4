@@ -2,6 +2,9 @@
 # Any other work, need to be done in a diffrent file. 
 # lst = list variables.
 
+import csv
+from datetime import datetime
+
 # Task D counts wether a value is equal or greater than a numbers in a list.
 # returns the amount of numbers that satisfy the parameter.
 def count_greater_equal(lst, value):
@@ -135,3 +138,42 @@ def calculate_plantgrowth(temp_list):
 # total_growth = calculate_plantgrowth(temp_list)
 # print(total_growth)
 
+################# PART 2 ##############
+# task b (function)
+
+def count_skiable_days_per_season(weather_data, snow_depth_index, date_index, skiing_depth_threshold=20):
+    # Initialize a dictionary to hold the count of skiable days per season
+    skiable_days_per_season = {}
+
+    # Skip the header row
+    for entry in weather_data[1:]:  # Assuming the first row is the header
+        date_str = entry[date_index]
+        snow_depth = entry[snow_depth_index]
+
+        # Skip entries with missing snow depth data
+        if snow_depth == '-' or snow_depth == '':
+            continue
+
+        # Convert snow depth to an integer
+        snow_depth = int(snow_depth)
+
+        # how i calculated the winter season:
+        date_obj = datetime.strptime(date_str, '%d.%m.%Y')
+        if 10 <= date_obj.month <= 12:
+            season_year = date_obj.year  # october to December belongs to the start of the winter season
+        else:
+            season_year = date_obj.year - 1  # january to June belongs to the tail end of the winter season
+
+        # if this season_year is not yet in the dictionary:
+        if season_year not in skiable_days_per_season:
+            skiable_days_per_season[season_year] = []
+
+        # adding snow depth to the correct season
+        skiable_days_per_season[season_year].append(snow_depth)
+
+    # counting the skiable days for each season
+    skiable_days_count = {}
+    for season, depths in skiable_days_per_season.items():
+        skiable_days_count[season] = count_greater_equal(depths, skiing_depth_threshold)
+
+    return skiable_days_count

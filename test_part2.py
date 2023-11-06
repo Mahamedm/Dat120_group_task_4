@@ -19,8 +19,6 @@ initialize_data()
 
 # task b
 
-# Usage:
-# You need to pass the correct indexes for snow depth and date from your CSV data structure
 ski_seasons_data = count_skiable_days_per_season(single_weather_station, snow_depth_index=3, date_index=2)
 for season, days in ski_seasons_data.items():
     print(f"Winter season {season}-{season+1} had {days} skiing days.")

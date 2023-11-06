@@ -141,6 +141,8 @@ def calculate_plantgrowth(temp_list):
 ################# PART 2 ##############
 # task b (function)
 
+# Usage:
+# You need to pass the correct indexes for snow depth and date from your csv data structure
 def count_skiable_days_per_season(weather_data, snow_depth_index, date_index, skiing_depth_threshold=20):
     # Initialize a dictionary to hold the count of skiable days per season
     skiable_days_per_season = {}

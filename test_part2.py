@@ -41,8 +41,7 @@ filtered_ski_year,filtered_ski_days = [],[]
 for season, days in filtered_ski_seasons_data.items():
     filtered_ski_year.append(season);filtered_ski_days.append(days)
 
-filtered_ski_year = [int(year) for year in filtered_ski_year]
-filtered_ski_days = [int(year) for year in filtered_ski_days]
+filtered_ski_year, filtered_ski_days = [int(year) for year in filtered_ski_year], [int(year) for year in filtered_ski_days]
 
 a, b = calculate_trend(filtered_ski_year, filtered_ski_days)
 

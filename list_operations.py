@@ -2,6 +2,7 @@
 # Any other work, need to be done in a diffrent file. 
 # lst = list variables.
 
+import matplotlib.pyplot as plt
 import csv
 from datetime import datetime
 
@@ -139,12 +140,11 @@ def calculate_plantgrowth(temp_list):
 # print(total_growth)
 
 ################# PART 2 ##############
-# task b (function)
+# task b, c and d (function)
 
 # usage:
 # pass the correct indexes for snow depth and date from the csv data structure.
-def count_skiable_days_per_season(weather_data, snow_depth_index, date_index, skiing_depth_threshold=20):
-    # Initialize a dictionary to hold the count of skiable days per season
+def count_skiable_days_per_season(weather_data, snow_depth_index, date_index, skiing_depth_threshold=20, min_days=0):
     skiable_days_per_season = {}
 
     for entry in weather_data[1:]:  # the first row is the header
@@ -175,7 +175,8 @@ def count_skiable_days_per_season(weather_data, snow_depth_index, date_index, sk
     # counting the skiable days for each season
     skiable_days_count = {}
     for season, depths in skiable_days_per_season.items():
-        skiable_days_count[season] = count_greater_equal(depths, skiing_depth_threshold)
+        if len(depths) >= min_days: # number of days filter needed for task d
+            skiable_days_count[season] = count_greater_equal(depths, skiing_depth_threshold)
 
     return skiable_days_count
 

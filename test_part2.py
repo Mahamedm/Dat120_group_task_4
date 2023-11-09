@@ -18,7 +18,7 @@ initialize_data()
 
 # task b
 # TODO: Unbreak and uncomment the code before delivery!
-ski_seasons_data = count_skiable_days_per_season(single_weather_station, snow_depth_index=3, date_index=2)
+ski_seasons_data = count_skiable_days_per_season(single_weather_station, snow_depth_index=3, date_index=2, min_days=200)
 for season, days in ski_seasons_data.items():
     # print(f"Winter season {season}-{season+1} had {days} skiing days.")
     break 
@@ -35,41 +35,70 @@ elif (ski_trend<0):
     print(", Thus the trend is decreasing")
 else:
     print(", Thus there is no trend")
+# task d) 
+filtered_ski_seasons_data = count_skiable_days_per_season(single_weather_station, snow_depth_index=3, date_index=2, min_days=200)
+filtered_ski_year,filtered_ski_days = [],[]
+for season, days in filtered_ski_seasons_data.items():
+    filtered_ski_year.append(season);filtered_ski_days.append(days)
+
+filtered_ski_year = [int(year) for year in filtered_ski_year]
+filtered_ski_days = [int(year) for year in filtered_ski_days]
+
+a, b = calculate_trend(filtered_ski_year, filtered_ski_days)
+
+# print(f"{filtered_ski_year[0]} - {filtered_ski_year[-1]}")
+
+# Generate two points for the trend line
+start_year = min(filtered_ski_year)
+end_year = max(filtered_ski_year)
+trend_start = a * start_year + b
+trend_end = a * end_year + b
+
+plt.figure(1)
+
+# Plot the actual snow depth data
+plt.scatter(filtered_ski_year, filtered_ski_days, color='blue', label='Actual Ski Days')
+
+# Plot the trend line
+plt.plot([start_year, end_year], [trend_start, trend_end], color='red', label='Trend Line')
+
+# Label the plot
+plt.xlabel('Year')
+plt.ylabel('Number of Days with Skiers')
+plt.title('Snow Depth and Trend Line')
+plt.legend()
 
 
 # task g) Data analysis and plotting code
-def analyze_data(data):
-    valid_years = {}  
 
-    for row in data[1:]:  
-        try:
-            year = int(row[2].split('.')[2])  
-            skydekke = float(row[6].replace(',', '.'))  
+valid_years = {}  
 
-            
-            if year not in valid_years:
-                valid_years[year] = {'penvaersdager': 0, 'days_with_data': 0}
+for row in single_weather_station[1:]:  
+    try:
+        year = int(row[2].split('.')[2])  
+        skydekke = float(row[6].replace(',', '.'))  
 
-            valid_years[year]['days_with_data'] += 1
+        
+        if year not in valid_years:
+            valid_years[year] = {'penvaersdager': 0, 'days_with_data': 0}
 
-            if skydekke <= 3:
-                valid_years[year]['penvaersdager'] += 1
-        except (ValueError, IndexError):
-            pass
+        valid_years[year]['days_with_data'] += 1
 
-    valid_years = {year: data for year, data in valid_years.items() if data['days_with_data'] >= 300}
+        if skydekke <= 3:
+            valid_years[year]['penvaersdager'] += 1
+    except (ValueError, IndexError):
+        pass
 
-    years = list(valid_years.keys())
-    penvaersdager = [data['penvaersdager'] for data in valid_years.values()]
+valid_years = {year: data for year, data in valid_years.items() if data['days_with_data'] >= 300}
 
+years = list(valid_years.keys())
+penvaersdager = [data['penvaersdager'] for data in valid_years.values()]
 
-    plt.bar(years, penvaersdager)
-    plt.xlabel('Year')
-    plt.ylabel('Number of penværsdager')
-    plt.title('Number of penværsdager per year')
-    plt.show()
-
-analyze_data(single_weather_station)
+plt.figure(2)
+plt.bar(years, penvaersdager)
+plt.xlabel('Year')
+plt.ylabel('Number of penværsdager')
+plt.title('Number of penværsdager per year')
 
 
  # task h)
@@ -95,30 +124,30 @@ def analyze_wind_data(data):
 
     return valid_years
 
-
-def plot_wind_data(data):
-    years = list(data.keys())
-    highest_wind_speeds = [max(data[year]['wind_speeds']) for year in years]
-    median_wind_speeds = [sorted(data[year]['wind_speeds'])[len(data[year]['wind_speeds']) // 2] for year in years]
-
-   
-    plt.figure(figsize=(12, 6))
-    plt.subplot(2, 1, 1)
-    plt.plot(years, highest_wind_speeds, marker='o')
-    plt.xlabel('Year')
-    plt.ylabel('Highest Wind Speed (m/s)')
-    plt.title('Highest Wind Speed per Year')
-
-
-    plt.subplot(2, 1, 2)
-    plt.plot(years, median_wind_speeds, marker='o', color='orange')
-    plt.xlabel('Year')
-    plt.ylabel('Median Wind Speed (m/s)')
-    plt.title('Median Wind Speed per Year')
-
-    plt.tight_layout()
-    plt.show()
-
-
 wind_data = analyze_wind_data(single_weather_station)
-plot_wind_data(wind_data)
+
+# def plot_wind_data(data):
+years = list(wind_data.keys())
+highest_wind_speeds = [max(wind_data[year]['wind_speeds']) for year in years]
+median_wind_speeds = [sorted(wind_data[year]['wind_speeds'])[len(wind_data[year]['wind_speeds']) // 2] for year in years]
+
+
+plt.figure(3,figsize=(12, 6))
+plt.subplot(2, 1, 1)
+plt.plot(years, highest_wind_speeds, marker='o')
+plt.xlabel('Year')
+plt.ylabel('Highest Wind Speed (m/s)')
+plt.title('Highest Wind Speed per Year')
+
+
+plt.subplot(2, 1, 2)
+plt.plot(years, median_wind_speeds, marker='o', color='orange')
+plt.xlabel('Year')
+plt.ylabel('Median Wind Speed (m/s)')
+plt.title('Median Wind Speed per Year')
+
+plt.tight_layout()
+
+# shows all PLOTS 
+plt.show()
+

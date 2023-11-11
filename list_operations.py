@@ -180,4 +180,58 @@ def count_skiable_days_per_season(weather_data, snow_depth_index, date_index, sk
 
     return skiable_days_count
 
+# task e (function)
+def filter_temp_data(weather_data,min_days=0):
+    raw_years = {}
+
+    for column in weather_data[1:]:
+        temp_data = column[5]
+        if temp_data == '-' or temp_data == '':
+            continue
+
+        year = int(column[2].split('.')[2])
+        temp_data=float(temp_data.replace(',','.'))
+
+        # Adding the temperature data to the appopriate key in the dict
+        if year not in raw_years:
+            raw_years[year] = [temp_data]
+        else:
+            raw_years[year].append(temp_data)
+
+        # Filtering out the years the are too short
+    filtered_years = {}
+    for year in raw_years:
+        if len(raw_years[year])>(min_days-1):
+            filtered_years[year]=raw_years[year]
+        
+    return filtered_years
+
+# task f
+def find_dry_season(weather_data,min_days=0):
+    raw_years = {}
+
+    for column in weather_data[1:]:
+        rain_data = column[4]
+        if rain_data == '-' or rain_data == '':
+            continue
+
+        year = int(column[2].split('.')[2])
+        rain_data=float(rain_data.replace(',','.'))
+
+        if year not in raw_years:
+            raw_years[year] = [rain_data]
+        else:
+            raw_years[year].append(rain_data)
+
+    filtered_years = {}
+    for year in raw_years:
+        if len(raw_years[year])>(min_days-1):
+            filtered_years[year]=raw_years[year]
+
+    # Putting the filtered lists into the function from part 1
+    for years in filtered_years:
+        filtered_years[years]=longest_continuous_sequence_of_zeros(filtered_years[years])
+
+
+    return filtered_years
 

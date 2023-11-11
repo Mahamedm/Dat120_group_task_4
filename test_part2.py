@@ -67,6 +67,36 @@ plt.ylabel('Number of Days with Skiers')
 plt.title('Snow Depth and Trend Line')
 plt.legend()
 
+# task e) Plant growth
+temp_dict = filter_temp_data(single_weather_station,300)
+
+# converting dict to lists for plotting
+plantgrowth = []
+years1 = list(temp_dict.keys())
+for lst in temp_dict:
+    plantgrowth.append(calculate_plantgrowth(temp_dict[lst]))
+
+plt.figure(4)
+plt.bar(years1,plantgrowth)
+plt.xlabel('Year')
+plt.ylabel('Sum plantgrowth')
+plt.title('Total plantgrowth per year')
+
+# task f) Drought
+dry_dict = find_dry_season(single_weather_station,300)
+
+# converting dict to lists for plotting
+dry_list = []
+years2 = list(dry_dict.keys())
+for keys in dry_dict:
+    dry_list.append(dry_dict[keys])
+
+plt.figure(5)
+plt.grid()
+plt.plot(years2,dry_list)
+plt.xlabel('Year')
+plt.ylabel('Longest time without rain')
+plt.title('Longest time without rain by year')
 
 # task g) Data analysis and plotting code
 

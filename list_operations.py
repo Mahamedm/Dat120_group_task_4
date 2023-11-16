@@ -3,8 +3,11 @@
 # lst = list variables.
 
 import matplotlib.pyplot as plt
-import csv
+from collections import defaultdict
 from datetime import datetime
+import csv
+import os
+
 
 # Task D counts wether a value is equal or greater than a numbers in a list.
 # returns the amount of numbers that satisfy the parameter.
@@ -206,7 +209,7 @@ def filter_temp_data(weather_data,min_days=0):
         
     return filtered_years
 
-# task f
+# task f) function
 def find_dry_season(weather_data,min_days=0):
     raw_years = {}
 
@@ -234,4 +237,45 @@ def find_dry_season(weather_data,min_days=0):
 
 
     return filtered_years
+# task h) function
+def analyze_wind_data(data):
+    valid_years = {}  
+
+    
+    for row in data[1:]:  
+        try:
+            year = int(row[2].split('.')[2])  
+            wind_speed = float(row[7].replace(',', '.'))  
+
+            if year not in valid_years:
+                valid_years[year] = {'wind_speeds': []}
+
+            valid_years[year]['wind_speeds'].append(wind_speed)
+        except (ValueError, IndexError):
+            
+            pass
+
+    
+    valid_years = {year: data for year, data in valid_years.items() if len(data['wind_speeds']) >= 300}
+
+    return valid_years
+
+# task i) function
+def calculate_monthly_averages(weather_data, temp_index, date_index):
+    monthly_temps = defaultdict(list)
+
+    for entry in weather_data[1:]:
+        date_str = entry[date_index]
+        temperature = entry[temp_index]
+
+        if temperature == '-' or temperature == '':
+            continue
+        temperature = float(temperature.replace(',', '.'))
+        date_obj = datetime.strptime(date_str, '%d.%m.%Y')
+        month_year = date_obj.strftime('%B %Y')
+
+        monthly_temps[month_year].append(temperature)
+
+    monthly_averages = {month: sum(temps) / len(temps) for month, temps in monthly_temps.items()}
+    return monthly_averages
 
